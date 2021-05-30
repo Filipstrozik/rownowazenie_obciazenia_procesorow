@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public abstract class Procesor {
     protected ArrayList<Proces> procesList;
-//    protected ProcesorManager procesorManager;
-//protected SimulationConfig config = SimulationConfig.getInstance();
-//    protected SimulationStats stats = SimulationStats.getInstance();
+    protected ProcesorManager procesorManager;
+    protected KonfiguracjaSymulacji config = KonfiguracjaSymulacji.getInstance();
+    protected Stats stats = Stats.getInstance();
 
     //konstruktor
     public Procesor(ProcesorManager procesorManager) {
@@ -49,7 +49,7 @@ public abstract class Procesor {
 
     public ArrayList<Proces> transferSomeProcesses()
     {
-        int amtToTransfer = (int)((config.percentOfTasksToTransfer / 100.0f) * (float)procesList.size() + 0.5f);
+        int amtToTransfer = (int)((config.ileProcentDoTransferu / 100.0f) * (float)procesList.size() + 0.5f);
         ArrayList<Proces> toTransfer = new ArrayList<>();
 
         for (int i=0; i<amtToTransfer; i++)

@@ -4,13 +4,13 @@ import java.util.Random;
 public class ProcesorManager {
 
     private ArrayList<Procesor> procesorList;
-    private KolejkaProcesow = procesQue;
-    private GlobalClock clock = GlobalClock.getInstance();
-    private SimulationStats stats = SimulationStats.getInstance();
+    private KolejkaProcesow procesQue;
+    private Clock clock = Clock.getInstance();
+    private Stats stats = Stats.getInstance();
     private Random rand;
     private int nextProcessorToGetNewProcess = 0;
 
-    public ProcessorManager(KolejkaProcesow procQue)
+    public ProcesorManager(KolejkaProcesow procQue)
     {
         procesorList = new ArrayList<>();
         this.procesQue = procQue;
