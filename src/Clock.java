@@ -17,7 +17,7 @@ public class Clock {
         return currentTime;
     }
 
-    public void Tick(){
+    public void tick(){
         currentTime++;
     }
 

@@ -32,4 +32,22 @@ public class ProcesorManager {
     }
 
     //TODO executeProcesOnce
+
+    public void excuteProcessorsOnce(){
+        ArrayList<Proces> newProcessList = procesQue.getProcesyDoPrzetworzenia();
+        while(newProcessList.size()>0){
+            procesorList.get(nextProcessorToGetNewProcess).dodajProces(newProcessList.get(0));
+            newProcessList.remove(0);
+
+            nextProcessorToGetNewProcess++;
+            nextProcessorToGetNewProcess %= procesorList.size();
+        }
+
+        for(Procesor procesor:procesorList){
+            procesor.wykonajProces();
+        }
+        stats.addNewObciazenie(procesorList.get(0).getObciazenie());
+
+        clock.tick();
+    }
 }

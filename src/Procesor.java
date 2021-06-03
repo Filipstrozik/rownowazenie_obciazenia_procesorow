@@ -43,10 +43,6 @@ public abstract class Procesor {
 
 
 
-
-    //TODO transfer some processes() -> napraw po prostu xd
-
-
     public ArrayList<Proces> transferSomeProcesses()
     {
         int amtToTransfer = (int)((config.ileProcentDoTransferu / 100.0f) * (float)procesList.size() + 0.5f);
