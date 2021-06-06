@@ -30,6 +30,7 @@ public class KolejkaProcesow {
         for (int i = 0; i < procesList.size(); i++) {
             if(procesTimeList.get(i)<= clock.getCurrentTime()){
                 retLista.add(procesList.get(i));
+
                 procesList.remove(i);
                 procesTimeList.remove(i);
                 i--;

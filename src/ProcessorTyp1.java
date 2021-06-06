@@ -19,7 +19,7 @@ public class ProcessorTyp1 extends Procesor{
             Procesor rangProc = procesorManager.getRandomProcessor();
             stats.incrementProcessorQueriesCounter();
             if(rangProc.getObciazenie()<config.progObciazenia_P){
-                rangProc.dodajProcesMimoWszystko(proces); //TODO czemu force add?
+                rangProc.dodajProcesMimoWszystko(proces); //TODO czemu force add? nawet jak przekroczy 100%
                 stats.incrementProcessorQueriesCounter();
                 return;
             }

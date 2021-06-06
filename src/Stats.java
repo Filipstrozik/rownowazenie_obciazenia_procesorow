@@ -15,7 +15,7 @@ public class Stats {
     private Stats() {
         procesorSrednieObciazenie = new Average();
         processorLoadVariationAverage = new Average();
-        processorLoadsList = new ArrayList<Float>();
+        processorLoadsList = new ArrayList<>();
         processorQuerriesCounter = 0;
     }
 

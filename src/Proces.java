@@ -52,4 +52,9 @@ public class Proces {
     {
         return loadOnProcessor;
     }
+
+    @Override
+    public String toString(){
+        return "proc: " + procesID +", "+ procesSize+", "+ loadOnProcessor;
+    }
 }

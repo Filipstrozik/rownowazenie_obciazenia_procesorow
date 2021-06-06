@@ -27,11 +27,10 @@ public class ProcesorManager {
 
     public Procesor getRandomProcessor()
     {
-        int index = rand.nextInt() % procesorList.size();
+        int index = Math.abs(rand.nextInt() % procesorList.size());
         return procesorList.get(index);
     }
 
-    //TODO executeProcesOnce
 
     public void excuteProcessorsOnce(){
         ArrayList<Proces> newProcessList = procesQue.getProcesyDoPrzetworzenia();
@@ -42,12 +41,28 @@ public class ProcesorManager {
             nextProcessorToGetNewProcess++;
             nextProcessorToGetNewProcess %= procesorList.size();
         }
+//        if(procesorList.get(0).getObciazenie()>80.0){
+//            System.out.println(procesorList.get(0).getObciazenie());
+//        }
+//        System.out.println(procesorList.size());
+//        for(Procesor proc:procesorList){
+//            if(proc.getObciazenie()>100.0){
+//                System.out.println(proc);
+//            }
+//        }
+
 
         for(Procesor procesor:procesorList){
             procesor.wykonajProces();
         }
-        stats.addNewObciazenie(procesorList.get(0).getObciazenie());
+        stats.addNewObciazenie(procesorList.get(0).getObciazenie()); // average load on the first processor
 
         clock.tick();
     }
+
+    public ArrayList<Procesor> getProcesorList(){
+        return procesorList;
+    }
 }
+//TODO ZROZUMIEC DZIALANIE SYMULACJI ORAZ ZACHOWAN WYNIKOW WOBEC PARAMETROW, PRZECZYTAC COS Z TEORII
+//TODO POSPRAWDZAC POPRAWNOSC + ZAIMPLEMENTOAC JAKIS MIERNIK JAK DLUGO WYSTEPUJE PRZECIAZENIE OBCIAZENIE>100

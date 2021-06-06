@@ -15,7 +15,7 @@ public class Main {
 
         for (int i = 0; i < config.amtOfProcesses; i++) {
             int size = rng.nextInt(config.maxProcessSize-config.minProcessSize)+config.minProcessSize;
-            float load = rng.nextFloat()*(config.maxProcessSize-config.minProcessSize)+config.minProcessSize;
+            float load = (rng.nextFloat()*(config.maxProcessLoad-config.minProcessLoad))+config.minProcessLoad;
             procesList.add(new Proces(size,load));
         }
     }
@@ -60,8 +60,12 @@ public class Main {
 
         while (procQue.getKolejkaProcesowSize() > 0){
             procesorManager.excuteProcessorsOnce();
+            for (int i = 0; i < procesorManager.getProcesorList().size(); i++) {
+                System.out.println(i+" "+procesorManager.getProcesorList().get(i));
+            }
         }
 
+        System.out.println();
         if(proctyp == ProcesorTyp.proctyp1){
             System.out.println("Strategia procesora 1");
         } else if(proctyp == ProcesorTyp.proctyp2){
@@ -70,8 +74,8 @@ public class Main {
             System.out.println("Strategia procesora 3");
         }
 
-        System.out.println("Srednia obciazenia procesora: " + statystyka.getAveragePorcessorLoading());
-        System.out.println("Odychylenie od sredniej obciazenia procesora: " + statystyka.getAverageLoadVariation());
+        System.out.println("Srednia obciazenia: " + statystyka.getAveragePorcessorLoading());
+        System.out.println("Odychylenie od sredniej: " + statystyka.getAverageLoadVariation());
         System.out.println("Ilosc zapytan i migracji: " + statystyka.getAmtOfProcessorQueries());
     }
 
@@ -79,7 +83,16 @@ public class Main {
 
 
     public static void main(String[] args) {
-	// write your code here
+        rng = new Random();
+
+        gernerateProcesList();
+// ok proces listy takie same
+//        System.out.println(procesList);
+        simulate(ProcesorTyp.proctyp1);
+//        System.out.println(procesList);
+        simulate(ProcesorTyp.proctyp2);
+//        System.out.println(procesList);
+        simulate(ProcesorTyp.proctyp3);
+
     }
 }
-//TODO zrobic simulate

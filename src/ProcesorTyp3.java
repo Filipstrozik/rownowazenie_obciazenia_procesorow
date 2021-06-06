@@ -20,9 +20,7 @@ public class ProcesorTyp3 extends ProcesorTyp2 {
             Procesor rng = procesorManager.getRandomProcessor();
             if(rng.getObciazenie() > config.progObciazenia_P){
                 ArrayList<Proces> listaProcesowPrzechwyconych = rng.transferSomeProcesses();
-                for(Proces proc: listaProcesowPrzechwyconych){
-                    procesList.add(proc);
-                }
+                procesList.addAll(listaProcesowPrzechwyconych);
             }
         }
 
