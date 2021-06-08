@@ -27,4 +27,12 @@ public class Average {
         sum = 0;
         amount = 0;
     }
+
+    public double getSum() {
+        return sum;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
 }

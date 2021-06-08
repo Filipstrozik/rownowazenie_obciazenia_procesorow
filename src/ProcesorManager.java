@@ -35,7 +35,7 @@ public class ProcesorManager {
     public void excuteProcessorsOnce(){
         ArrayList<Proces> newProcessList = procesQue.getProcesyDoPrzetworzenia();
         while(newProcessList.size()>0){
-            procesorList.get(nextProcessorToGetNewProcess).dodajProces(newProcessList.get(0));
+            procesorList.get(nextProcessorToGetNewProcess).dodajProces(newProcessList.get(0)); // tutaj maja miejsce trzy strategie wykonywania dodawania procesu
             newProcessList.remove(0);
 
             nextProcessorToGetNewProcess++;
@@ -51,11 +51,18 @@ public class ProcesorManager {
 //            }
 //        }
 
-
+        //TODO tutaj w tpetli sprawdzaj czas przeciazenia i dodawaj czas -> jezeli jest to dodaj czas / jezeli nie dod sprawdz z max czas i zeruj czas curr
         for(Procesor procesor:procesorList){
             procesor.wykonajProces();
+            //lub
+
+            stats.addNewObciazenie(procesor.getObciazenie()); //average na wszyskich procesorach
+            //TODO w takim razie trzeba miec pole Average w kazdym procesorze tam miec srednia jego obciazenia i potem policzyc srednia z sredni. - w sumie nie trzeba bo srednia ze sredniej to to samo co srednia ze wszysckich chyba!!
+
+
         }
-        stats.addNewObciazenie(procesorList.get(0).getObciazenie()); // average load on the first processor
+        //lub
+//        stats.addNewObciazenie(procesorList.get(0).getObciazenie()); // average load on the first processor
 
         clock.tick();
     }

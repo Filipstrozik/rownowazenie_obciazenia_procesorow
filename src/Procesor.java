@@ -7,8 +7,10 @@ public abstract class Procesor {
     protected ProcesorManager procesorManager;
     protected KonfiguracjaSymulacji config = KonfiguracjaSymulacji.getInstance();
     protected Stats stats = Stats.getInstance();
+    protected int currentCzasPrzeciazenia;
+    protected int maxCzasPrzeciazenia;
 
-    //TODO DODAC POLA KTORE BY LICZYLY DLUGOSC CZASU PRZECIAZENIA PROCESORA CZYLI KIEDY OBCIAZENIE JEST>100.0 NP JAKIS CURRENT CZAS I MAX CZAS TEGO ZJAWISKA
+    //TODO DODAC POLA KTORE BY LICZYLY DLUGOSC CZASU PRZECIAZENIA PROCESORA CZYLI KIEDY OBCIAZENIE JEST>100.0 NP JAKIS CURRENT CZAS I MAX CZAS TEGO ZJAWISKA ...w trakcie
     //TODO FAKT ZE JAK JEST OBCIAZONY TO DLUZEJ TRWA CHYBA JEST NAPISANY W WYKONAJ PROCES - ODP NIEPRAWDA TRZEBA TO DODAC
     //TODO KOLEJKA CZEKAJACYCH PROCESOW AZ JAKIS PROCESOR BEDZIIE MIAL OBCIAZENIE<P
 
@@ -17,12 +19,14 @@ public abstract class Procesor {
         this.procesorID = lastID++;
         procesList = new ArrayList<>();
         this.procesorManager = procesorManager;
+        currentCzasPrzeciazenia=0;
+        maxCzasPrzeciazenia=0;
     }
 
     public float getObciazenie() {
         float load = 0;
-        for (int i = 0; i < procesList.size(); i++) {
-            load += procesList.get(i).getLoadOnProcessor();
+        for (Proces proces : procesList) {
+            load += proces.getLoadOnProcessor();
         }
         return load;
     }
@@ -38,8 +42,18 @@ public abstract class Procesor {
             Proces currentProces = procesList.get(i);
             //tutaj trzeba w zaleznosci od obciazenia wykonac x sekund procesu
             float mult = (float) (currentProces.getLoadOnProcessor() / 100.0);
-            //TODO TA WARTOSC ZMIEJSZYC PROPORCJONALNIE DO OBCIAZENIA PROCESORA
-            currentProces.przetworzProces((int) (100 * mult + 0.5));
+            float curentOciazegnie = getObciazenie();
+            if(curentOciazegnie>100.0){
+                //System.out.println("proces dluzej wykonywany bo obciazenie!");
+                mult = mult * 100f / 120f;
+                currentProces.przetworzProces((int) (100 * mult + 0.5));
+            } else {
+               //System.out.println("proces normalnie wykonywany bo obciazenie!");
+                currentProces.przetworzProces((int) (100 * mult + 0.5));
+            }
+
+            //TODO TA WARTOSC ZMIEJSZYC PROPORCJONALNIE DO OBCIAZENIA PROCESORA - DONE
+
             //jezeli skonczony to usun z procesora
             if(currentProces.isDone()){
                 procesList.remove(i);

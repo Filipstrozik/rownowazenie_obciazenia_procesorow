@@ -60,9 +60,9 @@ public class Main {
 
         while (procQue.getKolejkaProcesowSize() > 0){
             procesorManager.excuteProcessorsOnce();
-            for (int i = 0; i < procesorManager.getProcesorList().size(); i++) {
-                System.out.println(i+" "+procesorManager.getProcesorList().get(i));
-            }
+//            for (int i = 0; i < procesorManager.getProcesorList().size(); i++) {
+//                System.out.println(i+" "+procesorManager.getProcesorList().get(i));
+//            }
         }
 
         System.out.println();
@@ -74,7 +74,7 @@ public class Main {
             System.out.println("Strategia procesora 3");
         }
 
-        System.out.println("Srednia obciazenia: " + statystyka.getAveragePorcessorLoading());
+        System.out.println("Srednia obciazenia: " + statystyka.getAveragePorcessorLoading() +"   "+statystyka.procesorSrednieObciazenie.getAmount() + "   " + statystyka.procesorSrednieObciazenie.getSum());
         System.out.println("Odychylenie od sredniej: " + statystyka.getAverageLoadVariation());
         System.out.println("Ilosc zapytan i migracji: " + statystyka.getAmtOfProcessorQueries());
     }

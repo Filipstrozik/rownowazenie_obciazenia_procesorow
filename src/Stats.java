@@ -20,8 +20,8 @@ public class Stats {
     }
 
 
-    private Average procesorSrednieObciazenie;
-    private Average processorLoadVariationAverage;
+    public Average procesorSrednieObciazenie;
+    public Average processorLoadVariationAverage;
     ArrayList<Float> processorLoadsList;
     private int processorQuerriesCounter;
 
