@@ -58,12 +58,14 @@ public class Main {
         procesorManager.setProcessorList(procesorArrayList);
 
 
-        while (procQue.getKolejkaProcesowSize() > 0){
+//        while (procQue.getKolejkaProcesowSize() > 0){ //TODO nie wykonuja sie wszystkie procesy w liscie globalnych
+//            procesorManager.excuteProcessorsOnce();
+//        }
+
+        while (!procesorManager.isFinished){ //TODO naprawione co wyzej xd
             procesorManager.excuteProcessorsOnce();
-//            for (int i = 0; i < procesorManager.getProcesorList().size(); i++) {
-//                System.out.println(i+" "+procesorManager.getProcesorList().get(i));
-//            }
         }
+
 
         System.out.println();
         if(proctyp == ProcesorTyp.proctyp1){
@@ -73,10 +75,32 @@ public class Main {
         } else {
             System.out.println("Strategia procesora 3");
         }
+        //zbieranie informacji do statystyk
+        System.out.println("POSZCZEGOLNE SREDNIE PROCESOROW");
+        int MaxTime =0;
+        float minLoad=300f, maxLoad = 0f;
+        for(Procesor procesor: procesorManager.getProcesorList()){ //TODO wybierz max czas obciazeni i min i max sredniej
+            float currentAvg = (float) procesor.avg.getAverage();
+            statystyka.addNewObciazenie(currentAvg);
+            System.out.println(procesor+"  "+currentAvg);
+            if(procesor.maxCzasPrzeciazenia> MaxTime){
+                MaxTime = procesor.maxCzasPrzeciazenia;
+            }
+            if(minLoad > currentAvg){
+                minLoad = currentAvg;
+            }
+            if(maxLoad < currentAvg){
+                maxLoad = currentAvg;
+            }
 
+        }
+        System.out.println();
+        System.out.println("CZAS: " + Clock.getInstance().getCurrentTime());
+        //TODO napraw statystyke ogolnej sredniej
         System.out.println("Srednia obciazenia: " + statystyka.getAveragePorcessorLoading() +"   "+statystyka.procesorSrednieObciazenie.getAmount() + "   " + statystyka.procesorSrednieObciazenie.getSum());
         System.out.println("Odychylenie od sredniej: " + statystyka.getAverageLoadVariation());
         System.out.println("Ilosc zapytan i migracji: " + statystyka.getAmtOfProcessorQueries());
+        System.out.println("MaxTime: " + MaxTime + " minLoad: " + minLoad + " maxLoad: "+ maxLoad);
     }
 
 
