@@ -18,9 +18,9 @@ public class KonfiguracjaSymulacji {
 
     //pola
 
-    public int iloscProcesorow_N = 50;
+    public int iloscProcesorow_N = 70;
 
-    public float progObciazenia_P = 80;
+    public float progObciazenia_P = 50;
 
     public int iloscProbZapytan_Z = 10;
 

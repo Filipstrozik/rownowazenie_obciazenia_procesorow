@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class Main {
     static ArrayList<Proces> procesList;
+    static ArrayList<Integer> procesCzasList;
     static Random rng;
 
     enum ProcesorTyp {
@@ -12,11 +13,15 @@ public class Main {
     static void gernerateProcesList(){
         KonfiguracjaSymulacji config = KonfiguracjaSymulacji.getInstance();
         procesList = new ArrayList<>();
+        procesCzasList = new ArrayList<>();
 
         for (int i = 0; i < config.amtOfProcesses; i++) {
             int size = rng.nextInt(config.maxProcessSize-config.minProcessSize)+config.minProcessSize;
             float load = (rng.nextFloat()*(config.maxProcessLoad-config.minProcessLoad))+config.minProcessLoad;
             procesList.add(new Proces(size,load));
+            int randomBound = config.amtOfProcesses * config.czasMiedzyProcesami;
+            Random rng = new Random();
+            procesCzasList.add(rng.nextInt(randomBound));
         }
     }
 
@@ -25,6 +30,12 @@ public class Main {
         for (Proces proc:procesList){
             copy.add(new Proces(proc));
         }
+        return copy;
+    }
+
+    static ArrayList<Integer> ProcesTimeListCopy(){
+        ArrayList<Integer> copy = new ArrayList<>();
+        copy.addAll(procesCzasList);
         return copy;
     }
 
@@ -40,7 +51,7 @@ public class Main {
 
         KolejkaProcesow procQue = new KolejkaProcesow();
 
-        procQue.setProcesList(ProcesListCopy()); //przekazujemy kopie zawsze
+        procQue.setProcesList(ProcesListCopy(), ProcesTimeListCopy()); //przekazujemy kopie zawsze
 
         ProcesorManager procesorManager = new ProcesorManager(procQue);
 
@@ -58,11 +69,11 @@ public class Main {
         procesorManager.setProcessorList(procesorArrayList);
 
 
-//        while (procQue.getKolejkaProcesowSize() > 0){ //TODO nie wykonuja sie wszystkie procesy w liscie globalnych
+//        while (procQue.getKolejkaProcesowSize() > 0){
 //            procesorManager.excuteProcessorsOnce();
 //        }
 
-        while (!procesorManager.isFinished){ //TODO naprawione co wyzej xd
+        while (!procesorManager.isFinished){
             procesorManager.excuteProcessorsOnce();
         }
 
@@ -76,13 +87,13 @@ public class Main {
             System.out.println("Strategia procesora 3");
         }
         //zbieranie informacji do statystyk
-        System.out.println("POSZCZEGOLNE SREDNIE PROCESOROW");
+//        System.out.println("POSZCZEGOLNE SREDNIE PROCESOROW");
         int MaxTime =0;
         float minLoad=300f, maxLoad = 0f;
-        for(Procesor procesor: procesorManager.getProcesorList()){ //TODO wybierz max czas obciazeni i min i max sredniej
+        for(Procesor procesor: procesorManager.getProcesorList()){
             float currentAvg = (float) procesor.avg.getAverage();
             statystyka.addNewObciazenie(currentAvg);
-            System.out.println(procesor+"  "+currentAvg);
+//            System.out.println(procesor+"  "+currentAvg);
             if(procesor.maxCzasPrzeciazenia> MaxTime){
                 MaxTime = procesor.maxCzasPrzeciazenia;
             }
@@ -94,9 +105,8 @@ public class Main {
             }
 
         }
-        System.out.println();
+//        System.out.println();
         System.out.println("CZAS: " + Clock.getInstance().getCurrentTime());
-        //TODO napraw statystyke ogolnej sredniej
         System.out.println("Srednia obciazenia: " + statystyka.getAveragePorcessorLoading() +"   "+statystyka.procesorSrednieObciazenie.getAmount() + "   " + statystyka.procesorSrednieObciazenie.getSum());
         System.out.println("Odychylenie od sredniej: " + statystyka.getAverageLoadVariation());
         System.out.println("Ilosc zapytan i migracji: " + statystyka.getAmtOfProcessorQueries());
@@ -113,8 +123,10 @@ public class Main {
 // ok proces listy takie same
 //        System.out.println(procesList);
         simulate(ProcesorTyp.proctyp1);
+        Procesor.resetID();
 //        System.out.println(procesList);
         simulate(ProcesorTyp.proctyp2);
+        Procesor.resetID();
 //        System.out.println(procesList);
         simulate(ProcesorTyp.proctyp3);
 

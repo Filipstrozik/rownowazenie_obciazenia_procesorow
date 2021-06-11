@@ -16,12 +16,15 @@ public class ProcesorTyp3 extends ProcesorTyp2 {
         //tak jak w typie 2
         super.dodajProces(proces);
         //ponizej modyfikacja dzialania procesora typu 3
-        if(getObciazenie()< config.prog_R){
+        if(getObciazenie()< config.prog_R){ //TODO lepiej dodefinowac dzialanie to co na kartce -> odzcielic migracje od zapytan -> zrobic tak ze bierze po jednym z kazdego procesorze o >P dopoki przejdziemy z >R na aktualnym
+            //TODO migracje kazda na ilosc transferowanych procesow 1:1. odzielic ilosc zapytan
             Procesor rng = procesorManager.getRandomProcessor();
             if(rng.getObciazenie() > config.progObciazenia_P){
                 ArrayList<Proces> listaProcesowPrzechwyconych = rng.transferSomeProcesses();
                 procesList.addAll(listaProcesowPrzechwyconych);
+                stats.incrementProcessorQueriesCounter();
             }
+//            System.out.println("TRANSFER PROCESOW");
         }
 
 

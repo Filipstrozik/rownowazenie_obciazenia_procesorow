@@ -14,15 +14,17 @@ public class KolejkaProcesow {
         procesTimeList = new ArrayList<>();
     }
 
-    public void setProcesList(ArrayList<Proces> procList){
+    public void setProcesList(ArrayList<Proces> procList, ArrayList<Integer> procesTimeList){
         this.procesList = procList;
-        this.procesTimeList.clear();
-        int randomBound = procList.size() * config.czasMiedzyProcesami;
-        Random rng = new Random();
+        this.procesTimeList = procesTimeList;
+//        this.procesTimeList.clear();
 
-        for (int i = 0; i < procesList.size(); i++) {
-            procesTimeList.add(rng.nextInt(randomBound)); // wylosowanie czasu kiedy sie ma pojawic proces
-        }
+//        int randomBound = procList.size() * config.czasMiedzyProcesami; //tu PIES POGRZEBANY
+//        Random rng = new Random();
+//
+//        for (int i = 0; i < procesList.size(); i++) {
+//            procesTimeList.add(rng.nextInt(randomBound)); // wylosowanie czasu kiedy sie ma pojawic proces
+//        }
     }
 
     public ArrayList<Proces> getProcesyDoPrzetworzenia(){

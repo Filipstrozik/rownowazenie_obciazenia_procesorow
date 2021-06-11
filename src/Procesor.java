@@ -13,9 +13,6 @@ public abstract class Procesor {
     protected Average avg;
     protected boolean isFinished;
 
-    //TODO DODAC POLA KTORE BY LICZYLY DLUGOSC CZASU PRZECIAZENIA PROCESORA CZYLI KIEDY OBCIAZENIE JEST>100.0 NP JAKIS CURRENT CZAS I MAX CZAS TEGO ZJAWISKA ...w trakcie
-    //TODO FAKT ZE JAK JEST OBCIAZONY TO DLUZEJ TRWA CHYBA JEST NAPISANY W WYKONAJ PROCES - ODP NIEPRAWDA TRZEBA TO DODAC
-    //TODO KOLEJKA CZEKAJACYCH PROCESOW AZ JAKIS PROCESOR BEDZIIE MIAL OBCIAZENIE<P
 
     //konstruktor
     public Procesor(ProcesorManager procesorManager) {
@@ -28,7 +25,6 @@ public abstract class Procesor {
         isFinished = false;
     }
 
-    //TODO czy miedzy symulacjiami procesory sie zeruja?
 
     public float getObciazenie() {
         float load = 0;
@@ -50,17 +46,15 @@ public abstract class Procesor {
             //tutaj trzeba w zaleznosci od obciazenia wykonac x sekund procesu
             float mult = (float) (currentProces.getLoadOnProcessor() / 100.0);
             float curentOciazegnie = getObciazenie();
-//            avg.addNewValue(curentOciazegnie); // to mi zalatwia dodwanie obciazenia w procesmanager? //TODO czy ja tego nie usunalem???
+//            avg.addNewValue(curentOciazegnie); // to mi zalatwia dodwanie obciazenia w procesmanager?
             if(curentOciazegnie>100.0){
                 //System.out.println("proces dluzej wykonywany bo obciazenie!");
-                mult = mult * 100f / curentOciazegnie; //TODO KURKA WTF? - ok
+                mult = mult * 100f / curentOciazegnie;
                 currentProces.przetworzProces((int) (100 * mult + 0.5));
             } else {
                //System.out.println("proces normalnie wykonywany bo obciazenie!");
                 currentProces.przetworzProces((int) (100 * mult + 0.5));
             }
-
-            //TODO TA WARTOSC ZMIEJSZYC PROPORCJONALNIE DO OBCIAZENIA PROCESORA - DONE
 
             //jezeli skonczony to usun z procesora
             if(currentProces.isDone()){
@@ -77,13 +71,11 @@ public abstract class Procesor {
     {
         int amtToTransfer = (int)((config.ileProcentDoTransferu / 100.0) * (float)procesList.size() + 0.5);
         ArrayList<Proces> toTransfer = new ArrayList<>();
-
-        for (int i=0; i<amtToTransfer; i++) //TODO wtf czy to dziala w ogole? chyba tak
+        for (int i=0; i<amtToTransfer; i++)
         {
             toTransfer.add(procesList.get(0));
             procesList.remove(0);
         }
-
         return toTransfer;
     }
 
@@ -96,4 +88,7 @@ public abstract class Procesor {
         return "proc: "+ procesorID +" Load: " + getObciazenie() +" MaxTime: " + maxCzasPrzeciazenia + " Size: "+procesList.size();
     }
 
+    public static void resetID(){
+        lastID=0;
+    }
 }

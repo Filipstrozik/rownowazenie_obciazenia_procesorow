@@ -16,13 +16,13 @@ public class ProcesorTyp2 extends Procesor{
     public void dodajProces(Proces proces) {
         //sprawdz czy procsor może przyjac proces czyli czy próg p jest
         if(getObciazenie()>config.progObciazenia_P){
-            for (int i = 0; i < config.iloscProcesorow_N; i++) { //TODO czy chodzi ze N razy czy Z razy, w notatnkac jest az do skutku czyli w sumie N ?? ok dla pewnycej konfiguracji
+            for (int i = 0; i < config.iloscProcesorow_N; i++) {
                 Procesor rng = procesorManager.getRandomProcessor();
                 stats.incrementProcessorQueriesCounter();
                 if(rng.getObciazenie()< config.progObciazenia_P){
                     rng.dodajProcesMimoWszystko(proces);
                     stats.incrementProcessorQueriesCounter();
-                    return;
+                    return; // czy ten return niszczy?
                 }
             }
         }

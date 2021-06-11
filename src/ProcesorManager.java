@@ -38,34 +38,24 @@ public class ProcesorManager {
     }
 
 
-    public void excuteProcessorsOnce(){ //TODO jezeli procesque size()==0 to nie dodawaj nawet xd
+    public void excuteProcessorsOnce(){
         int procesQueSize = procesQue.getKolejkaProcesowSize();
         if(procesQueSize!=0){
             ArrayList<Proces> newProcessList = procesQue.getProcesyDoPrzetworzenia();
             while(newProcessList.size()>0){
+//                System.out.println(newProcessList);
+//                System.out.println(procesorList.get(nextProcessorToGetNewProcess));     // problem moze troche z liniowo wkazuja na procseory
                 procesorList.get(nextProcessorToGetNewProcess).dodajProces(newProcessList.get(0)); // tutaj maja miejsce trzy strategie wykonywania dodawania procesu
                 newProcessList.remove(0);
+//                System.out.println(procesorList.get(nextProcessorToGetNewProcess));     // problem moze troche z liniowo wkazuja na procseory
 
-                nextProcessorToGetNewProcess++;                         //TODO czy to sprawia, że zawsze pojawia sie na tym samym procesorze procses? - raczej tak
+                nextProcessorToGetNewProcess++;
                 nextProcessorToGetNewProcess %= procesorList.size();
-//                System.out.println(nextProcessorToGetNewProcess);     // problem moze troche z liniowo wkazuja na procseory
             }
         }
 
-//        if(procesorList.get(0).getObciazenie()>80.0){
-//            System.out.println(procesorList.get(0).getObciazenie());
-//        }
-//        System.out.println(procesorList.size());
-//        for(Procesor proc:procesorList){
-//            if(proc.getObciazenie()>100.0){
-//                System.out.println(proc);
-//            }
-//        }
-
-        //TODO tutaj w tpetli sprawdzaj czas przeciazenia i dodawaj czas -> jezeli jest to dodaj czas / jezeli nie dod sprawdz z max czas i zeruj czas curr - done
         for(Procesor procesor:procesorList){
-            //TODO jezeli procesQue jest pusta oraz size procesora jest 0 to finished procesor! jezeli wszystkie finished do procesormanager tez finished!
-            // czy nie powinno byc wczesiej liczone obciazenia?
+
             if(!procesor.isFinished){
                 procesor.wykonajProces();
                 float currentObciazenia = procesor.getObciazenie();
@@ -83,7 +73,6 @@ public class ProcesorManager {
                 //chyba maxczas przeciazenia zalatwione
                 // ktore wybiermy czy srednia na procesorze czy srednia ogolnie
 //            stats.addNewObciazenie(procesor.getObciazenie()); //average na wszyskich procesorach
-                //TODO w takim razie trzeba miec pole Average w kazdym procesorze tam miec srednia jego obciazenia i potem policzyc srednia z sredni. - w sumie nie trzeba bo srednia ze sredniej to to samo co srednia ze wszysckich chyba!!
                 if(procesQueSize ==0 && procesor.procesList.size()==0){
                     procesor.setFinished(); // procesor jest skonczony
                 }
@@ -108,5 +97,3 @@ public class ProcesorManager {
         return procesorList;
     }
 }
-//TODO ZROZUMIEC DZIALANIE SYMULACJI ORAZ ZACHOWAN WYNIKOW WOBEC PARAMETROW, PRZECZYTAC COS Z TEORII
-//TODO POSPRAWDZAC POPRAWNOSC + ZAIMPLEMENTOAC JAKIS MIERNIK JAK DLUGO WYSTEPUJE PRZECIAZENIE OBCIAZENIE>100
