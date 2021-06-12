@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Stats {
     //singleton
@@ -17,6 +19,8 @@ public class Stats {
         processorLoadVariationAverage = new Average();
         processorLoadsList = new ArrayList<>();
         processorQuerriesCounter = 0;
+        processorZapytaniaCounter =0;
+        procesorMigracjeCounter =0;
     }
 
 
@@ -24,6 +28,8 @@ public class Stats {
     public Average processorLoadVariationAverage;
     ArrayList<Float> processorLoadsList;
     private int processorQuerriesCounter;
+    private int processorZapytaniaCounter;
+    private int procesorMigracjeCounter;
 
     public void addNewObciazenie(float processorLoad) {
         // average load
@@ -35,6 +41,17 @@ public class Stats {
 
     public void incrementProcessorQueriesCounter() {
         processorQuerriesCounter++;
+    }
+
+    public void incrementProcessorZapytania(){
+        processorZapytaniaCounter++;
+    }
+
+    public void incrementProcessorMigracje(){
+        procesorMigracjeCounter++;
+    }
+    public void incrementProcessorMigracje(int ile){
+        procesorMigracjeCounter+=ile;
     }
 
     public float getAveragePorcessorLoading() {
@@ -55,6 +72,18 @@ public class Stats {
         return (float) processorLoadVariationAverage.getAverage();
     }
 
+    public float getMediana(){
+        Collections.sort(processorLoadsList);
+        return processorLoadsList.get(processorLoadsList.size()/2);
+    }
+
+    public int getProcessorZapytaniaCounter(){
+        return processorZapytaniaCounter;
+    }
+
+    public int getProcesorMigracjeCounter(){
+        return procesorMigracjeCounter;
+    }
 
     public int getAmtOfProcessorQueries() {
         return processorQuerriesCounter;
@@ -65,6 +94,9 @@ public class Stats {
         processorLoadVariationAverage.reset();
         processorLoadsList.clear();
         processorQuerriesCounter = 0;
+
+        procesorMigracjeCounter=0;
+        processorZapytaniaCounter=0;
     }
 
 }

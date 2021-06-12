@@ -15,14 +15,17 @@ public class ProcesorTyp2 extends Procesor{
     @Override
     public void dodajProces(Proces proces) {
         //sprawdz czy procsor może przyjac proces czyli czy próg p jest
+//        System.out.println("X: " + toString());
         if(getObciazenie()>config.progObciazenia_P){
             for (int i = 0; i < config.iloscProcesorow_N; i++) {
                 Procesor rng = procesorManager.getRandomProcessor();
-                stats.incrementProcessorQueriesCounter();
+                stats.incrementProcessorZapytania();
+//                stats.incrementProcessorQueriesCounter();
                 if(rng.getObciazenie()< config.progObciazenia_P){
                     rng.dodajProcesMimoWszystko(proces);
-                    stats.incrementProcessorQueriesCounter();
-                    return; // czy ten return niszczy?
+                    stats.incrementProcessorMigracje();
+//                    stats.incrementProcessorQueriesCounter();
+                    return; // czy ten return niszczy?//TODO w sumie nie niszczy niby
                 }
             }
         }

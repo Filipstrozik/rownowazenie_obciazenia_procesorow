@@ -107,9 +107,10 @@ public class Main {
         }
 //        System.out.println();
         System.out.println("CZAS: " + Clock.getInstance().getCurrentTime());
+//        System.out.println("Mediana: " + statystyka.getMediana());
         System.out.println("Srednia obciazenia: " + statystyka.getAveragePorcessorLoading() +"   "+statystyka.procesorSrednieObciazenie.getAmount() + "   " + statystyka.procesorSrednieObciazenie.getSum());
         System.out.println("Odychylenie od sredniej: " + statystyka.getAverageLoadVariation());
-        System.out.println("Ilosc zapytan i migracji: " + statystyka.getAmtOfProcessorQueries());
+        System.out.println("Ilosc zapytan i migracji: " + statystyka.getProcessorZapytaniaCounter()+ "  " + statystyka.getProcesorMigracjeCounter());
         System.out.println("MaxTime: " + MaxTime + " minLoad: " + minLoad + " maxLoad: "+ maxLoad);
     }
 

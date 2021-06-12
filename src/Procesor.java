@@ -69,7 +69,9 @@ public abstract class Procesor {
 
     public ArrayList<Proces> transferSomeProcesses()
     {
-        int amtToTransfer = (int)((config.ileProcentDoTransferu / 100.0) * (float)procesList.size() + 0.5);
+
+//        int amtToTransfer = (int)((config.ileProcentDoTransferu / 100.0) * (float)procesList.size() + 0.5); // moznaby pozmianiac na sztywno = 1\
+        int amtToTransfer = 1;
         ArrayList<Proces> toTransfer = new ArrayList<>();
         for (int i=0; i<amtToTransfer; i++)
         {
