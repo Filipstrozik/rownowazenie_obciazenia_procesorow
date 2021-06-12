@@ -34,6 +34,6 @@ public class KonfiguracjaSymulacji {
     public int minProcessSize = 100;
     public int maxProcessSize = 5000; // assuming that process sized 100 can be computed in one cycle if use 100% load
 
-    public float minProcessLoad = 0.5f;
-    public float maxProcessLoad = 80f;
+    public float minProcessLoad = 15f;
+    public float maxProcessLoad = 20f;
 }
