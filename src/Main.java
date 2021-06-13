@@ -131,5 +131,6 @@ public class Main {
 //        System.out.println(procesList);
         simulate(ProcesorTyp.proctyp3);
 
+
     }
 }

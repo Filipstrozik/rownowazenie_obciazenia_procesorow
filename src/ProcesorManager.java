@@ -7,8 +7,10 @@ public class ProcesorManager {
     private KolejkaProcesow procesQue;
     private Clock clock = Clock.getInstance();
     private Stats stats = Stats.getInstance();
+    private KonfiguracjaSymulacji config = KonfiguracjaSymulacji.getInstance();
     private Random rand;
     private int nextProcessorToGetNewProcess;
+    private int nextProcessor;
 
     public boolean isFinished;
     public int skonczoneProcesy;
@@ -21,6 +23,7 @@ public class ProcesorManager {
         isFinished = false;
         nextProcessorToGetNewProcess=0;
         skonczoneProcesy=0;
+        nextProcessor=0;
     }
 
     //functions
@@ -58,6 +61,17 @@ public class ProcesorManager {
 
             if(!procesor.isFinished){
                 procesor.wykonajProces();
+                if(procesor instanceof ProcesorTyp3){
+                    if(procesor.getObciazenie() < config.prog_R){
+                        Procesor rng = getRandomProcessor();
+                        stats.incrementProcessorZapytania();
+                        while(rng.getObciazenie() > config.progObciazenia_P && procesor.getObciazenie()<config.prog_R){ //zamieniono na while
+                            ArrayList<Proces> listaProcesowPrzechwyconych = rng.transferSomeProcesses();
+                            procesor.procesList.addAll(listaProcesowPrzechwyconych);
+                            stats.incrementProcessorMigracje(listaProcesowPrzechwyconych.size());
+                        }
+                    }
+                }
                 float currentObciazenia = procesor.getObciazenie();
                 procesor.avg.addNewValue(currentObciazenia); // jednak nie , badzmy w czasie
                 if(currentObciazenia>100f){
