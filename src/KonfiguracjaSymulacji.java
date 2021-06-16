@@ -18,22 +18,24 @@ public class KonfiguracjaSymulacji {
 
     //pola
 
-    public int iloscProcesorow_N = 50;
+    public int iloscProcesorow_N = 50;      //100 - mniejsze obciazenie- brak przeciazen - czesto ponizej progu R ale nie ponizej progu P
 
-    public float progObciazenia_P = 80;
+    public float progObciazenia_P = 80;     // ma wplyw w sumie na kazda symulacje
 
-    public int iloscProbZapytan_Z = 10;
+    public int iloscProbZapytan_Z = 10;     //2 lub 1 zmienia zapytania oraz dzialania strategii 1
 
-    public float prog_R = 20;
+    public float prog_R = 20;               // pokazuje roznice dzialania miedzy strategia 2 a 3
 
     // my config values
+
+    public int czasMiedzyProcesami = 1;   // sytuacje typowe czyli dosc gesto procesow
+    public int amtOfProcesses = 10000;    //
+
+    public int minProcesRozmiar = 100;    // szybkosc przetwaraznia zalezna od przydzielonego zasobu (obciazenia)
+    public int maxProcesRozmiar = 5000;   //
+
+    public float minProcesObciazenie = 15f; // dosc podobne procesy
+    public float maxProcesObciazenie = 20f;
+
     public  float ileProcentDoTransferu = 20;    // value between 0 and 100
-    public int czasMiedzyProcesami = 1;      // 3 time units average between new task is added
-    public int amtOfProcesses = 10000;
-
-    public int minProcessSize = 100;
-    public int maxProcessSize = 5000; // assuming that process sized 100 can be computed in one cycle if use 100% load
-
-    public float minProcessLoad = 15f;
-    public float maxProcessLoad = 20f;
 }

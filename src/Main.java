@@ -16,8 +16,8 @@ public class Main {
         procesCzasList = new ArrayList<>();
 
         for (int i = 0; i < config.amtOfProcesses; i++) {
-            int size = rng.nextInt(config.maxProcessSize-config.minProcessSize)+config.minProcessSize;
-            float load = (rng.nextFloat()*(config.maxProcessLoad-config.minProcessLoad))+config.minProcessLoad;
+            int size = rng.nextInt(config.maxProcesRozmiar -config.minProcesRozmiar)+config.minProcesRozmiar;
+            float load = (rng.nextFloat()*(config.maxProcesObciazenie -config.minProcesObciazenie))+config.minProcesObciazenie;
             procesList.add(new Proces(size,load));
             int randomBound = config.amtOfProcesses * config.czasMiedzyProcesami;
             Random rng = new Random();

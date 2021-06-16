@@ -64,7 +64,7 @@ public class ProcesorManager {
                 if(procesor instanceof ProcesorTyp3){
                     if(procesor.getObciazenie() < config.prog_R){
                         Procesor rng = getRandomProcessor();
-                        stats.incrementProcessorZapytania();
+                        stats.incrementProcessorZapytania(); // Zapytanie innego losowego
                         while(rng.getObciazenie() > config.progObciazenia_P && procesor.getObciazenie()<config.prog_R){ //zamieniono na while
                             ArrayList<Proces> listaProcesowPrzechwyconych = rng.transferSomeProcesses();
                             procesor.procesList.addAll(listaProcesowPrzechwyconych);
