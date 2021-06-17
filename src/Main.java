@@ -69,9 +69,6 @@ public class Main {
         procesorManager.setProcessorList(procesorArrayList);
 
 
-//        while (procQue.getKolejkaProcesowSize() > 0){
-//            procesorManager.excuteProcessorsOnce();
-//        }
 
         while (!procesorManager.isFinished){
             procesorManager.excuteProcessorsOnce();

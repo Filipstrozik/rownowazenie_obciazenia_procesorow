@@ -61,7 +61,7 @@ public class ProcesorManager {
 
             if(!procesor.isFinished){
                 procesor.wykonajProces();
-                if(procesor instanceof ProcesorTyp3){
+                if(procesor instanceof ProcesorTyp3){ // tutaj jest inna strategia w procesorTyp3
                     if(procesor.getObciazenie() < config.prog_R){
                         Procesor rng = getRandomProcessor();
                         stats.incrementProcessorZapytania(); // Zapytanie innego losowego

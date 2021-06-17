@@ -71,7 +71,7 @@ public abstract class Procesor {
     {
 
 //        int amtToTransfer = (int)((config.ileProcentDoTransferu / 100.0) * (float)procesList.size() + 0.5); // moznaby pozmianiac na sztywno = 1\
-        int amtToTransfer = 1;
+        int amtToTransfer = 1; // jednak na sztywno 1 robimy to z buforem
         ArrayList<Proces> toTransfer = new ArrayList<>();
         for (int i=0; i<amtToTransfer; i++)
         {

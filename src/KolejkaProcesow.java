@@ -19,11 +19,11 @@ public class KolejkaProcesow {
         this.procesTimeList = procesTimeList;
 //        this.procesTimeList.clear();
 
-//        int randomBound = procList.size() * config.czasMiedzyProcesami; //tu PIES POGRZEBANY
+//        int randomBound = procList.size() * config.czasMiedzyProcesami; // // zakomentowanie bo blad
 //        Random rng = new Random();
 //
 //        for (int i = 0; i < procesList.size(); i++) {
-//            procesTimeList.add(rng.nextInt(randomBound)); // wylosowanie czasu kiedy sie ma pojawic proces
+//            procesTimeList.add(rng.nextInt(randomBound)); //
 //        }
     }
 

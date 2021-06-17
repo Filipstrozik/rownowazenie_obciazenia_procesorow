@@ -17,11 +17,9 @@ public class ProcessorTyp1 extends Procesor{
     public void dodajProces(Proces proces) {
         for (int i = 0; i < config.iloscProbZapytan_Z; i++) {
             Procesor rangProc = procesorManager.getRandomProcessor();
-//            stats.incrementProcessorQueriesCounter();
             stats.incrementProcessorZapytania();
             if(rangProc.getObciazenie()<config.progObciazenia_P){
                 rangProc.dodajProcesMimoWszystko(proces);
-//                stats.incrementProcessorQueriesCounter();
                 stats.incrementProcessorMigracje();
                 return;
             }

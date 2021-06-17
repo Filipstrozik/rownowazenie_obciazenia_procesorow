@@ -16,7 +16,7 @@ public class KonfiguracjaSymulacji {
     }
 
 
-    //pola
+    //pola - parametry symulacji
 
     public int iloscProcesorow_N = 50;      //100 - mniejsze obciazenie- brak przeciazen - czesto ponizej progu R ale nie ponizej progu P
 
@@ -26,10 +26,10 @@ public class KonfiguracjaSymulacji {
 
     public float prog_R = 20;               // pokazuje roznice dzialania miedzy strategia 2 a 3
 
-    // my config values
+    // szegolowe parametry symulacji
 
     public int czasMiedzyProcesami = 1;   // sytuacje typowe czyli dosc gesto procesow
-    public int amtOfProcesses = 10000;    //
+    public int amtOfProcesses = 10000;    // duzo procesow
 
     public int minProcesRozmiar = 100;    // szybkosc przetwaraznia zalezna od przydzielonego zasobu (obciazenia)
     public int maxProcesRozmiar = 5000;   //
